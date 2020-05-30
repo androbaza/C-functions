@@ -21,21 +21,23 @@ int my_strlen(const char *input)
 int main(int argc, char *argv[])
 {
     // variables
-    //int traverser = 0;
+    
     int a_opt = 0;
     int R_opt = 0;
     int t_opt = 0;
+    int custom_path = 0;
 
     // counters
     int i = 1;
     int j;
     int k = 0;
+    // int traverser = 0;
     
     // check if number of arguments is correct
     if (argc < 1) return 1;
 
     // if no input: show original ls
-    else if (argc == 1) return 0;
+    else if (argc == 1) goto list_current_dir;
    
     // get arguments and path
     while(i<argc)
@@ -56,13 +58,22 @@ int main(int argc, char *argv[])
         {
             char temp[my_strlen(argv[i])];
             strcpy(temp, argv[i]);
-            char *directory_path = argv[i];п
+            char *directory_path = temp;
+            custom_path = 1;
         } 
         i++;
         j=1;
     }
 
+    list_current_dir:
+    if (custom_path == 0)
+    {
+        char *directory_path = ".";
+        printf("%s\n", directory_path); 
+        //list_dir(directory_path);   
+    }
 
+    
 
     return 0;
 }
