@@ -7,4 +7,8 @@ int param_R();
 
 int param_t();
 
+char * get_params(int, char **);
+
+int my_strlen(const char *);
+
 #endif

@@ -1,35 +1,82 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 #include <unistd.h>
 #include <string.h>
 #include <limits.h>
-#include "functions_ls.h"
+//#include "functions_ls.h"
 
+int my_strlen(const char *input)
+{
+    int i = 0;
+
+    while (input[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
 
 int main(int argc, char *argv[])
 {
     // variables
-    char *start_directory_path = (char *)calloc(10, sizeof(char));
-    if (start_directory_path == NULL)
-    {
-        return 1;
-    }
-    int traverser = 0;
+    //int traverser = 0;
+    int a_opt = 0;
+    int R_opt = 0;
+    int t_opt = 0;
 
-    // default starting directory
-    start_directory_path = ".\0";
-
-    // check if number of arguments is correct
-    if (argc < 1)
-    {
-        return 1;
-    }
-   
-    // get arguments
-    //get_arguments(argc, argv);
+    // counters
+    int i = 1;
+    int j;
+    int k = 0;
     
+    // check if number of arguments is correct
+    if (argc < 1) return 1;
 
-    free(start_directory_path);
+    // if no input: show original ls
+    else if (argc == 1) return 0;
+   
+    // get arguments and path
+    while(i<argc)
+    {
+        // check if this arg is options arg
+        if (argv[i][0] == '-')
+        {
+            while (argv[i][j] != '\0')
+            {
+                if (argv[i][j] == 'a') a_opt = 1;
+                if (argv[i][j] == 'R') R_opt = 1;
+                if (argv[i][j] == 't') t_opt = 1;
+                j++;
+            }
+        }  
+        // else it is a path
+        else
+        {
+            char temp[my_strlen(argv[i])];
+            strcpy(temp, argv[i]);
+            char *directory_path = argv[i];п
+        } 
+        i++;
+        j=1;
+    }
+
+
+
     return 0;
 }
+
+// -Wall -Wextra -Werror
+// gimli -verbose my_ls.c
+
+
+ // max path length is 4096 + 1 for \0
+    //char *directory_path = (char *)malloc(40*sizeof(char)); 
+    /*if (directory_path == NULL)
+    {
+        return 1;
+    }
+    */
+    // default starting directory
+    // strcpy(directory_path, ".");
