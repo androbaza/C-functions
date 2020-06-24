@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     if (argc < 1) return 1;
 
     // if no input: show original ls
-    else if (argc == 1) goto list_current_dir;
+    //else if (argc == 1) goto list_current_dir;
    
     // get arguments and path
     while(index_word<argc)
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 
     printf("path: %s\na: %i\nR: %i\nt: %i\n", directory_path, options->a, options->R, options->t); 
 
-    list_current_dir:
+    //list_current_dir:
     // if (custom_path == 0)
     // {
     //     char *directory_path = ".";
