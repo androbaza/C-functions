@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <limits.h>
+#include <dirent.h>
 //#include "functions_ls.h"
 
 
@@ -16,7 +17,7 @@ typedef struct opts
 } opts;
 
 
-void my_strcpy(const char *input, char *output)
+void my_strcpy(char *output, char *input)
 {
     int index = 0;
 
@@ -39,6 +40,23 @@ int my_strlen(const char *input)
     return index;
 }
 
+void list_contents (char *path, opts *options)
+{
+    DIR *drctr = opendir(path);
+    struct dirent *directory = readdir(drctr);
+
+    //take 256 as initial guess for # of items in dir
+    long contents_num = 256;
+    long index = 0;
+
+    char **contents_array = malloc(contents_num * sizeof(char*));
+
+    while (directory != NULL)
+    {
+
+    }
+
+}
 
 int main(int argc, char *argv[])
 {
@@ -61,7 +79,7 @@ int main(int argc, char *argv[])
     if (argc < 1) return 1;
 
     // if no input: show original ls
-    //else if (argc == 1) goto list_current_dir;
+    // else if (argc == 1) goto list_current_dir;
    
     // get arguments and path
     while(index_word<argc)
@@ -87,7 +105,9 @@ int main(int argc, char *argv[])
         index_symb=1;
     }
 
-    printf("path: %s\na: %i\nR: %i\nt: %i\n", directory_path, options->a, options->R, options->t); 
+    //printf("path: %s\na: %i\nR: %i\nt: %i\n", directory_path, options->a, options->R, options->t); 
+
+    list_contents(directory_path, options);
 
     //list_current_dir:
     // if (custom_path == 0)
@@ -105,14 +125,3 @@ int main(int argc, char *argv[])
 
 // -Wall -Wextra -Werror
 // gimli -verbose my_ls.c
-
-
- // max path length is 4096 + 1 for \0
-    //char *directory_path = (char *)malloc(40*sizeof(char)); 
-    /*if (directory_path == NULL)
-    {
-        return 1;
-    }
-    */
-    // default starting directory
-    // strcpy(directory_path, ".");
