@@ -116,28 +116,23 @@ char** sort_arr_str(char **contents_array, const size_t size, const opts *option
     {
         for (size_t j = i+1; j < size; j++)
         {
-            // sort by time
+            // lex sort
+            if (my_strcmp(contents_array[i], contents_array[j]) > 0)
+            {
+                    strcpy_for_sort(contents_array[i], contents_array[j]);
+            }
+            // time sort, if -t
             if (options->t == 1)
             {
                 if (my_timecmp(contents_array[i], contents_array[j]) > 0)
                 {
                     strcpy_for_sort(contents_array[i], contents_array[j]);
                 }
-                // if time is the same, sort by lex
-                else if ((my_timecmp(contents_array[i], contents_array[j]) == 0) && (my_strcmp(contents_array[i], contents_array[j]) > 0))
-                {
-                    strcpy_for_sort(contents_array[i], contents_array[j]);
-                }
-            }
-            // else sort by lex
-            else if (my_strcmp(contents_array[i], contents_array[j]) > 0)
-            {
-                    strcpy_for_sort(contents_array[i], contents_array[j]);
-            }
+            }    
         }
     }
     return contents_array;
-} 
+}
 
 void list_contents(const char *path, const opts *options)
 {
